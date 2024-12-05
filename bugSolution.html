@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug Solution</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <script>
+    // Safe way to handle potential missing properties
+    const div = document.createElement('div');
+    //Check for the property's existence before accessing it.
+    if (div.hasOwnProperty('nonExistentProperty')) {
+      console.log(div.nonExistentProperty);
+    } else {
+      console.log('Property does not exist');
+    }
+    document.body.appendChild(div);
+
+    // Secure handling of user input with innerHTML
+    let userInput = prompt("Enter some text:");
+    //Sanitize user input before using it with innerHTML (example using textContent)
+    document.getElementById('myDiv').textContent = userInput; 
+    //Or use a template literal and escape characters to prevent XSS
+    //document.getElementById('myDiv').innerHTML = `<h1>${userInput.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</h1>`;
+  </script>
+</body>
+</html>
