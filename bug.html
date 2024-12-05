@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <script>
+    // Attempting to access a non-existent property of a dynamically created element
+    const div = document.createElement('div');
+    div.nonExistentProperty = 'test'; //This will not throw an error in many browsers
+    console.log(div.nonExistentProperty); // but will return undefined.
+    document.body.appendChild(div);
+
+    // Incorrect use of innerHTML (Security risk and potential XSS vulnerability)
+    let userInput = prompt("Enter some text:");
+    document.getElementById('myDiv').innerHTML = userInput; //Vulnerable to XSS attacks if not sanitized
+  </script>
+</body>
+</html>
